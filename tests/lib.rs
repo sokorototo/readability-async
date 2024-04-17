@@ -1,4 +1,4 @@
-extern crate readability;
+extern crate readability_async;
 extern crate url;
 
 use std::fs::File;

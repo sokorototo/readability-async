@@ -1,6 +1,7 @@
 [package]
-name = "readability-wasm"
+name = "readability-async"
 version = "0.3.0"
+edition = "2021"
 authors = ["Hiroki Kumamoto <kumabook@live.jp>"]
 license = "MIT"
 homepage = "https://github.com/kumabook/readability"
@@ -15,8 +16,4 @@ url = "2.4"
 html5ever = "0.27.0"
 markup5ever_rcdom = "0.3.0"
 lazy_static = "1.4"
-
-[dependencies.reqwest-wasm]
-version = "0.11.16"
-features = ["blocking"]
-default-features = false
+reqwest-wasm = { version = "0.11.16", default-features = false }

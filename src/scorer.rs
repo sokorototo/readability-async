@@ -1,4 +1,4 @@
-use html5ever::ns;
+use html5ever::{namespace_url, ns};
 use lazy_static::lazy_static;
 
 use super::dom;

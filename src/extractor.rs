@@ -20,7 +20,7 @@ pub struct Product {
     pub text: String,
 }
 
-pub fn extract<R>(mut input: R, url: &Url) -> Result<Product, Error>
+pub fn extract<R>(mut input: R, url: &str) -> Result<Product, Error>
 where
     R: Read,
 {
@@ -50,7 +50,8 @@ where
     let mut bytes = vec![];
 
     let node = top_candidate.node.clone();
-    scorer::clean(&mut dom, Path::new(id), node.clone(), url, &candidates);
+    let url = Url::parse(url)?;
+    scorer::clean(&mut dom, Path::new(id), node.clone(), &url, &candidates);
 
     serialize(
         &mut bytes,

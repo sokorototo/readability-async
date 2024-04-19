@@ -20,18 +20,6 @@ pub struct Product {
     pub text: String,
 }
 
-pub async fn scrape(url: &str) -> Result<Product, Error> {
-    let mut res = worker::Fetch::Url(worker::Url::parse(url)?).send().await?;
-    let data = res.bytes().await?;
-
-    if res.status_code() == 200 {
-        let url = Url::parse(url)?;
-        extract(data.as_slice(), &url)
-    } else {
-        Err(Error::Unexpected)
-    }
-}
-
 pub fn extract<R>(mut input: R, url: &Url) -> Result<Product, Error>
 where
     R: Read,

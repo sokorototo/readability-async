@@ -4,7 +4,6 @@ use html5ever::{parse_document, serialize};
 use markup5ever_rcdom::{RcDom, SerializableHandle};
 
 use super::scorer;
-use reqwest_wasm;
 use scorer::Candidate;
 use std::cell::Cell;
 use std::collections::BTreeMap;
@@ -22,12 +21,10 @@ pub struct Product {
 }
 
 pub async fn scrape(url: &str) -> Result<Product, Error> {
-    let res = reqwest_wasm::get(url).await.map_err(Error::NetworkError)?;
-    let success = res.status().is_success();
+    let mut res = worker::Fetch::Url(worker::Url::parse(url)?).send().await?;
     let data = res.bytes().await?;
-    let data = data.to_vec();
 
-    if success {
+    if res.status_code() == 200 {
         let url = Url::parse(url)?;
         extract(data.as_slice(), &url)
     } else {

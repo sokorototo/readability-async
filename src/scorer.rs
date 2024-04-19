@@ -1,3 +1,6 @@
+use html5ever::ns;
+use lazy_static::lazy_static;
+
 use super::dom;
 use html5ever::tree_builder::TreeSink;
 use html5ever::tree_builder::{ElementFlags, NodeOrText};
@@ -7,7 +10,7 @@ use markup5ever_rcdom::Node;
 use markup5ever_rcdom::NodeData::{Comment, Doctype, Document, ProcessingInstruction};
 use markup5ever_rcdom::NodeData::{Element, Text};
 use markup5ever_rcdom::RcDom;
-use regex::Regex;
+use regex_lite::Regex;
 use std::cell::Cell;
 use std::collections::BTreeMap;
 use std::path::Path;
@@ -40,6 +43,7 @@ static BLOCK_CHILD_TAGS: [&str; 10] = [
     "table",
     "ul",
 ];
+
 lazy_static! {
     static ref PUNCTUATIONS: Regex = Regex::new(PUNCTUATIONS_REGEX).unwrap();
     static ref LIKELY: Regex = Regex::new(LIKELY_CANDIDATES).unwrap();

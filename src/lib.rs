@@ -1,13 +1,3 @@
-#[macro_use]
-extern crate html5ever;
-extern crate markup5ever_rcdom;
-extern crate regex;
-extern crate url;
-#[macro_use]
-extern crate lazy_static;
-
-extern crate reqwest_wasm;
-
 pub mod dom;
 pub mod error;
 pub mod extractor;

@@ -1,4 +1,3 @@
-use reqwest_wasm;
 use std::error;
 use std::fmt::{Display, Formatter, Result as FmtResult};
 use std::io;
@@ -6,7 +5,7 @@ use url;
 
 #[derive(Debug)]
 pub enum Error {
-    NetworkError(reqwest_wasm::Error),
+    NetworkError(worker::Error),
     UrlParseError(url::ParseError),
     Unexpected,
     IOError(io::Error),
@@ -35,8 +34,8 @@ impl From<io::Error> for Error {
     }
 }
 
-impl From<reqwest_wasm::Error> for Error {
-    fn from(err: reqwest_wasm::Error) -> Error {
+impl From<worker::Error> for Error {
+    fn from(err: worker::Error) -> Error {
         Error::NetworkError(err)
     }
 }
